@@ -244,65 +244,220 @@ Timeline Events per PR & 9.69 & 7.0 & 245 \\
 
 \subsection{Pull Request Distributions}
 
-Figure~\ref{fig:pr_dist} presents comprehensive PR metrics distributions using histograms, boxplots, and violin plots.
+Figures~\ref{fig:pr_files}--\ref{fig:pr_state} present comprehensive PR metrics distributions. All distributions show right-skewed patterns with medians significantly lower than means, indicating most PRs are small with occasional large outliers.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/pr_distributions.png}
-\caption{Pull Request Metrics Distributions: (Top) Files changed per PR shown as histogram, boxplot, and violin plot. (Middle) Lines added, deleted, and total changes per PR. (Bottom) PR title and body lengths, and state distribution. These visualizations reveal highly right-skewed distributions with median values significantly lower than means, indicating most PRs are small with occasional large outliers.}
-\label{fig:pr_dist}
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/01_pr_files_changed_histogram.png}
+\caption{Files changed per PR}
+\label{fig:pr_files}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/04_pr_lines_added_histogram.png}
+\caption{Lines added per PR}
+\label{fig:pr_added}
+\end{subfigure}
+
+\vspace{0.3cm}
+
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/05_pr_lines_deleted_histogram.png}
+\caption{Lines deleted per PR}
+\label{fig:pr_deleted}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/07_pr_title_length_histogram.png}
+\caption{PR title length}
+\label{fig:pr_title}
+\end{subfigure}
+
+\vspace{0.3cm}
+
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/08_pr_body_length_histogram.png}
+\caption{PR body length}
+\label{fig:pr_body}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/09_pr_state_distribution.png}
+\caption{PR state distribution}
+\label{fig:pr_state}
+\end{subfigure}
+
+\caption{Pull Request Metrics Distributions showing files changed, code changes, and text content characteristics. The histograms reveal heavily right-skewed distributions typical of software development activity.}
+\label{fig:pr_distributions_all}
 \end{figure}
 
 \textbf{Key Findings}: 
 \begin{itemize}
-    \item Median files changed: 4 files; Mean: 21.2 files
-    \item Median lines added: 42 lines; Mean: 777.9 lines
+    \item Median files changed: 3 files; Mean: 15.6 files
+    \item Median lines added: 46 lines; Mean: 778.4 lines
+    \item Median PR title: 39 chars; Body: 383 chars
     \item Distribution is heavily right-skewed (long tail of large PRs)
 \end{itemize}
 
 \subsection{Commit, Review, and Timeline Distributions}
 
-Figure~\ref{fig:commit_review} analyzes collaborative activity patterns.
+Figures~\ref{fig:commits}--\ref{fig:timeline} analyze collaborative activity patterns showing moderate engagement levels.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/commit_review_timeline_distributions.png}
-\caption{Commit, Review, and Timeline Distributions: (Top) Commits per PR with histogram and boxplot, commit message lengths. (Middle) Reviews per PR, review body lengths, and review state distribution. (Bottom) Comments per PR, comment body lengths, and timeline events. The data shows moderate engagement with median values around 1 review and 0-1 comments per PR.}
-\label{fig:commit_review}
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/10_commits_per_pr_histogram.png}
+\caption{Commits per PR}
+\label{fig:commits}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/13_reviews_per_pr_histogram.png}
+\caption{Reviews per PR}
+\label{fig:reviews}
+\end{subfigure}
+
+\vspace{0.3cm}
+
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/16_comments_per_pr_histogram.png}
+\caption{Comments per PR}
+\label{fig:comments}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/18_timeline_events_per_pr_histogram.png}
+\caption{Timeline events per PR}
+\label{fig:timeline}
+\end{subfigure}
+
+\caption{Collaborative Activity Distributions showing commits, reviews, comments, and timeline events per pull request. Median values around 2-3 commits, 0-1 reviews, and 0-1 comments indicate moderate collaboration levels.}
+\label{fig:commit_review_all}
 \end{figure}
+
+\textbf{Key Insights}:
+\begin{itemize}
+    \item Most PRs have 1-3 commits (iterative development)
+    \item Median reviews: 1 per PR; Comments: 0-1 per PR
+    \item Timeline events average 9.7 per PR (lifecycle tracking)
+\end{itemize}
 
 \subsection{User and Repository Distributions}
 
-Figure~\ref{fig:user_repo} characterizes participation and repository characteristics.
+Figures~\ref{fig:prs_user}--\ref{fig:languages} characterize participation patterns and repository characteristics across the ecosystem.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/user_repo_distributions.png}
-\caption{User and Repository Distributions: (Top) PRs per user, PRs per repository, and user follower counts. (Bottom) Repository stars and forks distributions, and top 10 programming languages. TypeScript dominates with 650 repositories (23.16\%), followed by Python (530 repos, 18.88\%).}
-\label{fig:user_repo}
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/19_prs_per_user_histogram.png}
+\caption{PRs per user}
+\label{fig:prs_user}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/20_prs_per_repo_histogram.png}
+\caption{PRs per repository}
+\label{fig:prs_repo}
+\end{subfigure}
+
+\vspace{0.3cm}
+
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/21_user_followers_histogram.png}
+\caption{User followers distribution}
+\label{fig:followers}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/22_repo_stars_histogram.png}
+\caption{Repository stars distribution}
+\label{fig:stars}
+\end{subfigure}
+
+\vspace{0.3cm}
+
+\begin{subfigure}[b]{0.9\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/24_programming_languages_barplot.png}
+\caption{Top 15 programming languages across repositories}
+\label{fig:languages}
+\end{subfigure}
+
+\caption{User and Repository Distributions showing participation patterns, social metrics, and programming language diversity. TypeScript dominates with 650 repositories (23.16\%), followed by Python (530 repos, 18.88\%).}
+\label{fig:user_repo_all}
 \end{figure}
+
+\textbf{Key Observations}:
+\begin{itemize}
+    \item User activity: Median 18.7 PRs/user; highly concentrated (few power users)
+    \item Repository activity: Median 12.0 PRs/repo (active maintenance)
+    \item Social metrics: Median 58 followers/user, 564 stars/repo
+    \item Language diversity: 15+ major languages, TypeScript and Python lead
+\end{itemize}
 
 \subsection{File-Level Change Distributions}
 
-Figure~\ref{fig:file_level} provides detailed file modification analysis.
+Figures~\ref{fig:file_adds}--\ref{fig:event_types} provide detailed file modification analysis showing granular change patterns.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/file_level_distributions.png}
-\caption{File-Level Change Distributions: File additions and deletions per change with histograms and boxplots, file status distribution (added/modified/deleted), and top timeline event types. Most file changes are small (median 3 lines added), with occasional large modifications.}
-\label{fig:file_level}
-\end{figure}
-
-\subsection{Comprehensive Overview}
-
-Figure~\ref{fig:overview} synthesizes all key metrics in a single visualization.
-
-\begin{figure}[H]
+\begin{subfigure}[b]{0.48\textwidth}
 \centering
-\includegraphics[width=\textwidth]{figures/dataset_summary_overview.png}
-\caption{Dataset Summary Overview: Comprehensive visualization showing entity counts (log scale), lines of code statistics, people metrics, and file/vocabulary counts. The bottom panel provides a detailed statistical summary of all key metrics.}
-\label{fig:overview}
+\includegraphics[width=\textwidth]{figures_individual/25_file_additions_histogram.png}
+\caption{Lines added per file}
+\label{fig:file_adds}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/26_file_deletions_histogram.png}
+\caption{Lines deleted per file}
+\label{fig:file_dels}
+\end{subfigure}
+
+\vspace{0.3cm}
+
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/27_file_status_distribution.png}
+\caption{File status distribution}
+\label{fig:file_status}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/30_timeline_event_types_barplot.png}
+\caption{Top 15 timeline event types}
+\label{fig:event_types}
+\end{subfigure}
+
+\caption{File-Level Change Distributions showing additions, deletions, file statuses, and timeline event types. Most file changes are small (median 4 lines added, 1 deleted) with occasional large refactorings.}
+\label{fig:file_level_all}
 \end{figure}
+
+\textbf{Key Patterns}:
+\begin{itemize}
+    \item Median file changes: 4 additions, 1 deletion (small incremental edits)
+    \item Most common status: ``modified'' files (vs added/removed)
+    \item Top events: committed (79,735), commented (32,957), closed (29,677)
+    \item File-level granularity reveals fine-grained development patterns
+\end{itemize}
+
 
 \section{Agent-Specific Analysis}
 
