@@ -8,11 +8,15 @@
 \usepackage{subcaption}
 \usepackage{float}
 \usepackage{amsmath}
-\usepackage{hyperref}
 \usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 
-\title{\textbf{AIDev Dataset Analysis: Size Metrics and Distribution Study}}
-\author{Graduate Assignment - Software Engineering}
+\title{\textbf{AIDev Dataset Analysis:\\Size Metrics and Distribution Study}}
+\author{
+    \textbf{Tayyib Ul Hassan}\\
+    \texttt{CMPUT660F25 Assignment 1}\\[0.5em]
+    \textit{Instructor: Abram Hindle}
+}
 \date{\today}
 
 \begin{document}
@@ -20,98 +24,79 @@
 \maketitle
 
 \begin{abstract}
-This report presents a comprehensive analysis of the AIDev dataset, focusing on size metrics and entity distributions. We examine the dataset's composition, including pull requests, repositories, users, issues, comments, reviews, commits, and timeline events. Through extensive statistical analysis and visualizations, we characterize the dataset's scale (33,596 PRs, 2,807 repositories, 1,796 users), temporal evolution, and collaborative patterns. Our findings reveal significant insights into AI-generated code contributions and their impact on software development workflows.
+This report analyzes the AIDev dataset (33,596 PRs, 2,807 repositories, 1,796 users) covering size metrics, entity distributions, traceability, and temporal evolution of AI-generated code contributions across five autonomous coding agents: Claude Code, Cursor, Copilot, Devin, and OpenAI Codex.
 \end{abstract}
+\newpage
+
+\tableofcontents
+\newpage
+
+\section*{Acknowledgements}
+\addcontentsline{toc}{section}{Acknowledgements}
+
+I acknowledge the use of AI tools in completing this assignment: Claude 4.5 Sonnet was used to write code for data analysis and figure generation, and GPT-5 assisted in compiling the LaTeX report. All code was reviewed and verified for correctness, and all analysis interpretations are my own.
+
+\newpage
 
 \section{Introduction}
 
-The AIDev dataset contains AI-generated pull requests from GitHub repositories, spanning autonomous coding agents including Claude Code, Cursor, Copilot, Devin, and OpenAI Codex. This comprehensive analysis addresses all assignment requirements:
+AIDev dataset: AI-generated PRs from 5 agents (Claude Code, Cursor, Copilot, Devin, OpenAI Codex). Analysis covers: (1) Schema \& research questions, (2) Size metrics, (3) Distributions, (4) Traceability \& temporal evolution.
 
-\begin{enumerate}
-    \item \textbf{Section 1.5.1}: Schema description and research questions
-    \item \textbf{Section 1.5.2}: Size metrics across all entities
-    \item \textbf{Section 1.5.3}: Distribution analysis with boxplots and histograms
-    \item \textbf{Section 1.5.4}: Traceability analysis (URLs, multi-language entities, temporal evolution)
-\end{enumerate}
-
-\section{Schema Description and Analysis (Section 1.5.1)}
+\section{Schema Description}
 
 \subsection{Dataset Schema}
 
-The AIDev dataset follows a relational structure centered around pull requests (PR):
+\begin{table}[H]
+\centering
+\caption{AIDev Dataset Schema}
+\small
+\begin{tabular}{@{}lrl@{}}
+\toprule
+\textbf{Entity Type} & \textbf{Count} & \textbf{Key Fields} \\
+\midrule
+\multicolumn{3}{l}{\textit{Core Entities}} \\
+USER & 1,796 & id, login, followers, following, created\_at \\
+REPOSITORY & 2,807 & id, full\_name, language, stars, forks \\
+PULL\_REQUEST & 33,596 & id, title, body, state, merged\_at, agent \\
+ISSUE & 4,614 & id, title, body, state, closed\_at \\
+\midrule
+\multicolumn{3}{l}{\textit{Interactions}} \\
+PR\_COMMENTS & 39,122 & pr\_id, user, body, created\_at \\
+PR\_REVIEWS & 28,875 & pr\_id, user, state, submitted\_at \\
+PR\_REVIEW\_COMMENTS & 19,450 & pr\_id, user, body, line, path \\
+RELATED\_ISSUE & 4,923 & pr\_id, issue\_id (linkage) \\
+\midrule
+\multicolumn{3}{l}{\textit{Code Changes}} \\
+PR\_COMMITS & 88,576 & pr\_id, sha, message, author \\
+PR\_COMMIT\_DETAILS & 711,923 & pr\_id, filename, additions, deletions, status \\
+\midrule
+\multicolumn{3}{l}{\textit{Activity Tracking}} \\
+PR\_TIMELINE & 325,500 & pr\_id, event, actor, created\_at \\
+PR\_TASK\_TYPE & 33,596 & pr\_id, task\_type \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\textbf{Core Entities:}
-\begin{itemize}
-    \item \textbf{USER}: Authors, reviewers, participants (1,796 users) with fields: id, login, name, email, company, location, followers, following, public\_repos, created\_at
-    \item \textbf{REPOSITORY}: Projects hosting AI-generated PRs (2,807 repos) with: id, url, full\_name, language, forks\_count, stars\_count
-    \item \textbf{PULL\_REQUEST}: Central entity (33,596 PRs) with: id, number, title, body, user\_id, user, state, created\_at, closed\_at, merged\_at, repo\_id, repo\_url, html\_url
-    \item \textbf{ISSUE}: Related issue reports (4,614 issues) with: id, number, title, body, user, state, created\_at, closed\_at
-\end{itemize}
+\subsection{Missing Schema Elements \& Research Questions}
 
-\textbf{Interaction Entities:}
-\begin{itemize}
-    \item \textbf{PR\_COMMENTS}: Review discussion (39,122 comments)
-    \item \textbf{PR\_REVIEWS}: Code reviews (28,875 reviews) with state: approved, changes\_requested
-    \item \textbf{PR\_REVIEW\_COMMENTS}: Line-specific comments (19,450 comments)
-    \item \textbf{RELATED\_ISSUE}: PR-issue linkage (4,923 relationships)
-\end{itemize}
+\begin{table}[H]
+\centering
+\caption{Schema Analysis Summary}
+\small
+\begin{tabular}{@{}p{4cm}p{9cm}@{}}
+\toprule
+\textbf{Category} & \textbf{Details} \\
+\midrule
+\textit{Missing Elements} & Code quality metrics, CI/CD data, reviewer expertise, thread structure, file content \\
+\textit{How to Obtain} & GitHub API (Actions, CodeQL), reviewer history analysis, timestamp reconstruction \\
+\midrule
+\textit{Easy Questions} & PR acceptance rates, agent productivity, temporal patterns, code churn, review engagement, repo popularity, language distribution \\
+\textit{Hard Questions} & Code quality impact, bug rates, reviewer expertise correlation, test coverage, review effectiveness, semantic similarity, learning curves \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\textbf{Code Change Entities:}
-\begin{itemize}
-    \item \textbf{PR\_COMMITS}: Commit records (88,576 commits)
-    \item \textbf{PR\_COMMIT\_DETAILS}: File-level changes (711,923 changes) with: additions, deletions, filename, status, patch
-\end{itemize}
-
-\textbf{Activity Tracking:}
-\begin{itemize}
-    \item \textbf{PR\_TIMELINE}: Event history (325,500 events)
-    \item \textbf{PR\_TASK\_TYPE}: PR classification (33,596 records)
-\end{itemize}
-
-\subsection{What is Missing from the Schema}
-
-\textbf{Expected but Missing:}
-\begin{itemize}
-    \item \textbf{Code Quality Metrics}: No test coverage, cyclomatic complexity, or code smell indicators
-    \item \textbf{Build/CI Information}: No continuous integration status, build times, or test results
-    \item \textbf{Reviewer Expertise}: No information about reviewer qualifications or domain expertise
-    \item \textbf{Discussion Thread Structure}: Comment threads lack parent-child relationships
-    \item \textbf{File Content}: Raw file blobs are not included, only metadata and patches
-\end{itemize}
-
-\textbf{How to Obtain Missing Information:}
-\begin{itemize}
-    \item \textbf{Code Quality}: Parse patches to compute metrics (complexity, duplication) or use GitHub API for CodeQL results
-    \item \textbf{CI Information}: Query GitHub Actions API using repo\_url and PR number
-    \item \textbf{Reviewer Expertise}: Analyze reviewer commit history in the repository
-    \item \textbf{Thread Structure}: Parse comment created\_at timestamps and reconstruct from body mentions
-\end{itemize}
-
-\subsection{Questions Easy to Answer}
-
-\begin{enumerate}
-    \item \textbf{PR acceptance rates}: Direct computation from merged\_at vs closed\_at timestamps
-    \item \textbf{Agent productivity}: Count PRs per agent using user field patterns
-    \item \textbf{Temporal patterns}: Analyze created\_at timestamps for activity trends
-    \item \textbf{Code churn}: Sum additions/deletions from PR\_COMMIT\_DETAILS
-    \item \textbf{Review engagement}: Count reviews and comments per PR
-    \item \textbf{Repository popularity}: Use stars\_count and forks\_count directly
-    \item \textbf{Language distribution}: Aggregate by repository.language field
-\end{enumerate}
-
-\subsection{Questions Hard to Answer}
-
-\begin{enumerate}
-    \item \textbf{Code quality improvement}: Requires analyzing actual code content (not just patches) and running quality metrics
-    \item \textbf{Bug introduction rate}: Needs long-term tracking of issues linked to specific PRs (incomplete linkage)
-    \item \textbf{Reviewer expertise correlation}: Requires external data about reviewer skills and domain knowledge
-    \item \textbf{Test coverage changes}: Not captured in dataset; would need CI system integration
-    \item \textbf{Code review effectiveness}: Difficult to measure without bug tracking and code quality metrics
-    \item \textbf{Semantic code similarity}: Requires NLP/ML analysis of patch content and cannot be computed from metadata
-    \item \textbf{Developer learning curves}: Hard to attribute skill improvement vs. task complexity changes
-\end{enumerate}
-
-\section{Size Metrics Analysis (Section 1.5.2)}
+\section{Size Metrics Analysis}
 
 \subsection{Entity Counts}
 
@@ -240,11 +225,11 @@ Timeline Events per PR & 9.69 & 7.0 & 245 \\
 \end{tabular}
 \end{table}
 
-\section{Distribution Analysis (Section 1.5.3)}
+\section{Distribution Analysis}
 
 \subsection{Pull Request Distributions}
 
-Figures~\ref{fig:pr_files}--\ref{fig:pr_state} present comprehensive PR metrics distributions. All distributions show right-skewed patterns with medians significantly lower than means, indicating most PRs are small with occasional large outliers.
+Figures~\ref{fig:pr_files}--\ref{fig:pr_state} show right-skewed PR metrics (median << mean).
 
 \begin{figure}[H]
 \centering
@@ -294,21 +279,13 @@ Figures~\ref{fig:pr_files}--\ref{fig:pr_state} present comprehensive PR metrics 
 \label{fig:pr_state}
 \end{subfigure}
 
-\caption{Pull Request Metrics Distributions showing files changed, code changes, and text content characteristics. The histograms reveal heavily right-skewed distributions typical of software development activity.}
+\caption{Pull Request Metrics Distributions (right-skewed; Median: 3 files, 46 lines added, 39 char title)}
 \label{fig:pr_distributions_all}
 \end{figure}
 
-\textbf{Key Findings}: 
-\begin{itemize}
-    \item Median files changed: 3 files; Mean: 15.6 files
-    \item Median lines added: 46 lines; Mean: 778.4 lines
-    \item Median PR title: 39 chars; Body: 383 chars
-    \item Distribution is heavily right-skewed (long tail of large PRs)
-\end{itemize}
-
 \subsection{Commit, Review, and Timeline Distributions}
 
-Figures~\ref{fig:commits}--\ref{fig:timeline} analyze collaborative activity patterns showing moderate engagement levels.
+Figures~\ref{fig:commits}--\ref{fig:timeline} show collaborative activity (Median: 1-3 commits, 0-1 reviews/comments per PR).
 
 \begin{figure}[H]
 \centering
@@ -342,20 +319,13 @@ Figures~\ref{fig:commits}--\ref{fig:timeline} analyze collaborative activity pat
 \label{fig:timeline}
 \end{subfigure}
 
-\caption{Collaborative Activity Distributions showing commits, reviews, comments, and timeline events per pull request. Median values around 2-3 commits, 0-1 reviews, and 0-1 comments indicate moderate collaboration levels.}
+\caption{Collaborative Activity Distributions (Median: 2-3 commits, 0-1 reviews, 0-1 comments, 9.7 timeline events/PR)}
 \label{fig:commit_review_all}
 \end{figure}
 
-\textbf{Key Insights}:
-\begin{itemize}
-    \item Most PRs have 1-3 commits (iterative development)
-    \item Median reviews: 1 per PR; Comments: 0-1 per PR
-    \item Timeline events average 9.7 per PR (lifecycle tracking)
-\end{itemize}
-
 \subsection{User and Repository Distributions}
 
-Figures~\ref{fig:prs_user}--\ref{fig:languages} characterize participation patterns and repository characteristics across the ecosystem.
+Figures~\ref{fig:prs_user}--\ref{fig:languages} show user/repo patterns (TypeScript: 23\%, Python: 19\%).
 
 \begin{figure}[H]
 \centering
@@ -398,21 +368,13 @@ Figures~\ref{fig:prs_user}--\ref{fig:languages} characterize participation patte
 \label{fig:languages}
 \end{subfigure}
 
-\caption{User and Repository Distributions showing participation patterns, social metrics, and programming language diversity. TypeScript dominates with 650 repositories (23.16\%), followed by Python (530 repos, 18.88\%).}
+\caption{User and Repository Distributions (Median: 18.7 PRs/user, 12.0 PRs/repo, 58 followers, 564 stars)}
 \label{fig:user_repo_all}
 \end{figure}
 
-\textbf{Key Observations}:
-\begin{itemize}
-    \item User activity: Median 18.7 PRs/user; highly concentrated (few power users)
-    \item Repository activity: Median 12.0 PRs/repo (active maintenance)
-    \item Social metrics: Median 58 followers/user, 564 stars/repo
-    \item Language diversity: 15+ major languages, TypeScript and Python lead
-\end{itemize}
-
 \subsection{File-Level Change Distributions}
 
-Figures~\ref{fig:file_adds}--\ref{fig:event_types} provide detailed file modification analysis showing granular change patterns.
+Figures~\ref{fig:file_adds}--\ref{fig:event_types} show file-level changes (Median: 4 additions, 1 deletion per file).
 
 \begin{figure}[H]
 \centering
@@ -446,72 +408,14 @@ Figures~\ref{fig:file_adds}--\ref{fig:event_types} provide detailed file modific
 \label{fig:event_types}
 \end{subfigure}
 
-\caption{File-Level Change Distributions showing additions, deletions, file statuses, and timeline event types. Most file changes are small (median 4 lines added, 1 deleted) with occasional large refactorings.}
+\caption{File-Level Change Distributions (Top events: committed 79K, commented 33K, closed 30K)}
 \label{fig:file_level_all}
 \end{figure}
 
-\textbf{Key Patterns}:
-\begin{itemize}
-    \item Median file changes: 4 additions, 1 deletion (small incremental edits)
-    \item Most common status: ``modified'' files (vs added/removed)
-    \item Top events: committed (79,735), commented (32,957), closed (29,677)
-    \item File-level granularity reveals fine-grained development patterns
-\end{itemize}
 
+\section{Traceability Analysis}
 
-\section{Agent-Specific Analysis}
-
-Understanding the different AI coding agents' behaviors provides insights into their adoption patterns and effectiveness.
-
-\subsection{Agent Adoption Landscape}
-
-Figure~\ref{fig:agent_adoption} shows how different AI agents are being adopted across the dataset.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{figures/fig1_agent_adoption_landscape.png}
-\caption{Agent Adoption Landscape: (Left) PR volume distribution showing OpenAI Codex dominates with 21,799 PRs (64.89\%). (Middle) Repository reach across agents. (Right) Intensity of usage (PRs per repository) with OpenAI Codex at 17.5 PRs/repo.}
-\label{fig:agent_adoption}
-\end{figure}
-
-\subsection{PR Acceptance Rates by Agent}
-
-Figure~\ref{fig:pr_acceptance} analyzes success rates across different agents.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{figures/fig2_pr_acceptance_rates.png}
-\caption{PR Acceptance Rates: (Left) PR status distribution by agent showing merge rates from 43\% (Copilot) to 82.6\% (OpenAI Codex). (Right) Temporal trends in merge rates over time, indicating evolving patterns.}
-\label{fig:pr_acceptance}
-\end{figure}
-
-\subsection{Entity Distribution by Agent}
-
-Figure~\ref{fig:entity_dist} provides comprehensive metrics across different agents.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{figures/fig3_entity_distributions.png}
-\caption{Entity Distributions by Agent: Nine-panel analysis showing files changed per PR, code additions, PR description lengths, review comment intensity, time to merge, repository popularity, commit message verbosity, developer social reach, and issue detail. Reveals distinct agent behavior patterns.}
-\label{fig:entity_dist}
-\end{figure}
-
-\subsection{Human vs. Bot Reviewer Engagement}
-
-Figure~\ref{fig:human_bot} examines how human and bot reviewers interact with AI-generated code.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{figures/fig5_human_vs_bot_engagement.png}
-\caption{Human vs Bot Reviewer Engagement: Six-panel analysis showing reviewer type distribution (58.5\% human, 41.5\% bot), review verbosity comparison, review decisions, comment frequency, and top reviewers. Bots write longer reviews (avg 11,700 chars) vs humans (avg 200 chars).}
-\label{fig:human_bot}
-\end{figure}
-
-\section{Traceability Analysis (Section 1.5.4)}
-
-\subsection{Text Blobs and Content Analysis}
-
-The dataset contains substantial text content across multiple entity types:
+\subsection{Text Blobs, URLs \& Languages}
 
 \begin{table}[H]
 \centering
@@ -534,39 +438,27 @@ Issue Bodies & 4,614 & 1,534.7 \\
 \end{tabular}
 \end{table}
 
-\subsection{URL and External References}
+\begin{table}[H]
+\centering
+\caption{URL Analysis and Top Domains}
+\small
+\begin{tabular}{@{}lrlr@{}}
+\toprule
+\textbf{Metric} & \textbf{Value} & \textbf{Top Domain} & \textbf{Count (\%)} \\
+\midrule
+Total URLs & 157,480 & github.com & 24,635 (15.64\%) \\
+Unique URLs & 84,451 & chatgpt.com & 17,417 (11.06\%) \\
+URLs/Blob (avg) & 0.690 & gh.io & 8,962 (5.69\%) \\
+GitHub URLs (internal) & 29,924 (19\%) & vercel.com & 6,775 (4.30\%) \\
+External URLs & 127,556 (81\%) & docs.coderabbit.ai & 6,252 (3.97\%) \\
+ &  & coderabbit.ai & 5,945 (3.78\%) \\
+ &  & app.codecov.io & 5,440 (3.45\%) \\
+ &  & app.devin.ai & 4,975 (3.16\%) \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-Analysis of URLs in text content reveals extensive external references:
-
-\begin{itemize}
-    \item \textbf{Total URLs Found}: 157,480 across all text fields
-    \item \textbf{Unique URLs}: 84,451 distinct references
-    \item \textbf{URLs per Blob (avg)}: 0.690
-    \item \textbf{GitHub URLs}: 29,924 (19.0\%) - internal references
-    \item \textbf{External URLs}: 127,556 (81.0\%) - foreign resources
-\end{itemize}
-
-\textbf{Top URL Domains (Top 10):}
-\begin{enumerate}
-    \item github.com: 24,635 (15.64\%)
-    \item chatgpt.com: 17,417 (11.06\%)
-    \item gh.io: 8,962 (5.69\%)
-    \item vercel.com: 6,775 (4.30\%)
-    \item docs.coderabbit.ai: 6,252 (3.97\%)
-    \item coderabbit.ai: 5,945 (3.78\%)
-    \item app.codecov.io: 5,440 (3.45\%)
-    \item app.devin.ai: 4,975 (3.16\%)
-    \item vercel.live: 4,045 (2.57\%)
-    \item twitter.com: 3,820 (2.43\%)
-\end{enumerate}
-
-\subsection{Multi-Language Entities}
-
-\subsubsection{Programming Languages in File Changes}
-
-The dataset contains 711,923 file-level changes across diverse programming languages:
-
-\textbf{Top 20 Programming Languages:}
+\subsection{Multi-Language Analysis}
 \begin{table}[H]
 \centering
 \caption{Programming Language Distribution in File Changes}
@@ -599,59 +491,27 @@ Swift & 2,676 & 0.38\% \\
 \end{tabular}
 \end{table}
 
-\subsubsection{Multi-Language PR Analysis}
+\begin{table}[H]
+\centering
+\caption{Multi-Language PR Statistics and Agent Behavior}
+\small
+\begin{tabular}{@{}lrlr@{}}
+\toprule
+\textbf{Metric} & \textbf{Value} & \textbf{Agent} & \textbf{Multi-lang \%} \\
+\midrule
+Total PRs w/ files & 33,580 & Claude Code & 58.7\% (2.55 avg) \\
+Single-language & 14,829 (44.2\%) & Cursor & 49.4\% (1.96 avg) \\
+Multi-language & 11,666 (34.7\%) & Devin & 44.4\% (1.96 avg) \\
+Avg langs/PR & 1.37 & OpenAI Codex & 39.0\% (1.49 avg) \\
+Max langs/PR & 15 & Copilot & 0.0\% (0.00 avg) \\
+\midrule
+\multicolumn{4}{l}{\textit{Top Language Combos: Go+MD (2,698), MD+Py (737), MD+TS (372)}} \\
+\multicolumn{4}{l}{\textit{Natural Languages: English 98.7\%, Chinese 0.5\%, Spanish 0.4\%}} \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\textbf{Single vs. Multi-Language PRs:}
-\begin{itemize}
-    \item \textbf{Total PRs with file changes}: 33,580
-    \item \textbf{Single-language PRs}: 14,829 (44.2\%)
-    \item \textbf{Multi-language PRs}: 11,666 (34.7\%)
-    \item \textbf{Average languages per PR}: 1.37
-    \item \textbf{Max languages in a PR}: 15
-\end{itemize}
-
-\textbf{Top Language Combinations (Multi-language PRs):}
-\begin{enumerate}
-    \item Go + Markdown: 2,698 PRs
-    \item Markdown + Python: 737 PRs  
-    \item Markdown + TypeScript: 372 PRs
-    \item JSON + TypeScript: 338 PRs
-    \item Java + Markdown: 318 PRs
-    \item Markdown + YAML: 232 PRs
-    \item Go + JSON: 200 PRs
-    \item C\# + Markdown: 196 PRs
-    \item JavaScript + TypeScript: 182 PRs
-    \item JSON + TypeScript + YAML: 160 PRs
-\end{enumerate}
-
-\textbf{Multi-Language Behavior by Agent:}
-\begin{itemize}
-    \item \textbf{Claude Code}: 58.7\% multi-language, avg 2.55 langs/PR (Most versatile)
-    \item \textbf{Cursor}: 49.4\% multi-language, avg 1.96 langs/PR
-    \item \textbf{Devin}: 44.4\% multi-language, avg 1.96 langs/PR
-    \item \textbf{OpenAI Codex}: 39.0\% multi-language, avg 1.49 langs/PR
-    \item \textbf{Copilot}: 0.0\% multi-language, avg 0.00 langs/PR
-\end{itemize}
-
-\subsubsection{Natural Languages}
-
-Analysis of text content reveals linguistic patterns:
-\begin{itemize}
-    \item \textbf{Primary Language}: English (98.7\% of all text content)
-    \item \textbf{Secondary Languages}: Detected in 1.3\% of texts
-    \begin{itemize}
-        \item Chinese: 234 instances (0.5\%)
-        \item Spanish: 187 instances (0.4\%)
-        \item Other languages: 189 instances (0.4\%)
-    \end{itemize}
-    \item \textbf{Code-Switched Content}: 1,456 texts (0.6\%) mix multiple natural languages
-\end{itemize}
-
-\section{Temporal Analysis - Entities Over Time}
-
-\subsection{Research Question 1: PR Activity Evolution}
-
-\textbf{Hypothesis}: PR creation shows growth patterns indicating increasing adoption of AI coding agents.
+\section{Temporal Evolution}
 
 \begin{figure}[H]
 \centering
@@ -660,20 +520,12 @@ Analysis of text content reveals linguistic patterns:
 \label{fig:temporal_pr}
 \end{figure}
 
-\subsection{Research Question 2: Multi-Entity Evolution}
-
-\textbf{Hypothesis}: Comments, reviews, and issues follow similar temporal patterns to PRs, indicating correlated community engagement.
-
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/temporal_02_multi_entity_evolution.png}
 \caption{Multi-Entity Temporal Evolution: (Top) Weekly activity and cumulative growth for PRs, comments, reviews, and issues. (Middle) Engagement intensity ratios and timeline events. (Bottom) Normalized comparison and correlation heatmap showing strong positive correlations between entity types (r > 0.7 for most pairs).}
 \label{fig:temporal_multi}
 \end{figure}
-
-\subsection{Research Question 3: Repository \& User Growth}
-
-\textbf{Hypothesis}: The dataset shows expansion in both repository diversity and user base, indicating growing ecosystem adoption.
 
 \begin{figure}[H]
 \centering
@@ -682,10 +534,6 @@ Analysis of text content reveals linguistic patterns:
 \label{fig:temporal_repo_user}
 \end{figure}
 
-\subsection{Comprehensive Temporal Evolution}
-
-Figure~\ref{fig:temporal_evolution} synthesizes temporal patterns across all agents.
-
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/fig4_temporal_evolution.png}
@@ -693,101 +541,116 @@ Figure~\ref{fig:temporal_evolution} synthesizes temporal patterns across all age
 \label{fig:temporal_evolution}
 \end{figure}
 
-\section{Key Findings and Insights}
 
-\subsection{Dataset Scale}
-\begin{itemize}
-    \item \textbf{Substantial Size}: 1.3M+ entities across 10 entity types
-    \item \textbf{Code Volume}: 26M+ lines added, 196K+ unique files
-    \item \textbf{Rich Vocabulary}: 142K+ unique tokens across all text fields
-\end{itemize}
+\section{Agent-Specific Analysis}
 
-\subsection{Distribution Characteristics}
-\begin{itemize}
-    \item \textbf{Heavy Right Skew}: Most metrics show highly skewed distributions with long tails
-    \item \textbf{Small Median, Large Mean}: Median PR changes 4 files (mean: 21), indicating most contributions are focused
-    \item \textbf{Engagement Variability}: Review and comment activity varies widely (0-168 comments per PR)
-\end{itemize}
+\subsection{Agent Adoption \& Acceptance}
 
-\subsection{Temporal Patterns}
-\begin{itemize}
-    \item \textbf{Steady Growth}: Both PRs and repositories show consistent linear-to-polynomial growth
-    \item \textbf{Strong Correlations}: Entity activities are highly correlated (r > 0.7), suggesting coordinated development patterns
-    \item \textbf{Ecosystem Expansion}: Average 50+ new repositories and 30+ new users per week
-\end{itemize}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig1_agent_adoption_landscape.png}
+\caption{Agent Adoption Landscape: (Left) PR volume distribution showing OpenAI Codex dominates with 21,799 PRs (64.89\%). (Middle) Repository reach across agents. (Right) Intensity of usage (PRs per repository) with OpenAI Codex at 17.5 PRs/repo.}
+\label{fig:agent_adoption}
+\end{figure}
 
-\subsection{Community Characteristics}
-\begin{itemize}
-    \item \textbf{Diverse Participation}: 6,834 unique people across different roles
-    \item \textbf{Language Diversity}: TypeScript (23\%), Python (19\%), Go (9\%) dominate
-    \item \textbf{Active Collaboration}: 28,875 reviews and 39,122 comments demonstrate strong peer engagement
-\end{itemize}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig2_pr_acceptance_rates.png}
+\caption{PR Acceptance Rates: (Left) PR status distribution by agent showing merge rates from 43\% (Copilot) to 82.6\% (OpenAI Codex). (Right) Temporal trends in merge rates over time, indicating evolving patterns.}
+\label{fig:pr_acceptance}
+\end{figure}
 
-\section{Conclusion}
+\subsection{Entity Distributions by Agent}
 
-This comprehensive analysis addresses all assignment requirements (Sections 1.5.1-1.5.4) and reveals a substantial, well-structured corpus of AI-generated code contributions.
+\begin{figure}[H]
+\centering
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/31_entity_files_changed_by_agent.png}
+\caption{Files changed per PR by agent}
+\label{fig:entity_files}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/32_entity_lines_added_by_agent.png}
+\caption{Code additions by agent}
+\label{fig:entity_additions}
+\end{subfigure}
 
-\subsection{Summary of Findings}
+\vspace{0.3cm}
 
-\textbf{Schema Analysis (1.5.1):}
-\begin{itemize}
-    \item 10 core entity types with relational structure centered on pull requests
-    \item Missing: code quality metrics, CI/CD information, reviewer expertise data
-    \item Easy questions: PR acceptance rates, temporal patterns, code churn
-    \item Hard questions: code quality impact, bug rates, semantic similarity
-\end{itemize}
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/33_entity_pr_description_length_by_agent.png}
+\caption{PR description length by agent}
+\label{fig:entity_pr_desc}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/34_entity_review_comment_intensity_by_agent.png}
+\caption{Review comment intensity by agent}
+\label{fig:entity_comments}
+\end{subfigure}
 
-\textbf{Size Metrics (1.5.2):}
-\begin{itemize}
-    \item \textbf{Scale}: 1.3M+ entities (33,596 PRs, 711,923 file changes, 325,500 events)
-    \item \textbf{Code}: 26.1M lines added, 12.6M lines deleted, 196K unique files
-    \item \textbf{People}: 6,834 unique participants (1,796 users, 3,267 reviewers, 4,521 commenters)
-    \item \textbf{Text}: 228,379 text blobs (90.6\% non-empty), 105.78 MB total content
-    \item \textbf{Summary Statistics}: Mean, median, std, skewness, kurtosis, IQR for all metrics
-\end{itemize}
+\vspace{0.3cm}
 
-\textbf{Distribution Analysis (1.5.3):}
-\begin{itemize}
-    \item Heavily right-skewed distributions (long tail of large contributions)
-    \item Median PR: 4 files, 42 lines added, 1 review, 0-1 comments
-    \item Mean PR: 21.2 files, 777.9 lines added (indicating outlier influence)
-    \item Boxplots and histograms reveal extreme variance across all metrics
-\end{itemize}
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/35_entity_time_to_merge_by_agent.png}
+\caption{Time to merge by agent}
+\label{fig:entity_merge_time}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/36_entity_repository_popularity.png}
+\caption{Repository popularity distribution}
+\label{fig:entity_repo_pop}
+\end{subfigure}
 
-\textbf{Traceability (1.5.4):}
-\begin{itemize}
-    \item \textbf{Text Blobs}: 228,379 total (206,959 non-empty, 90.6\%)
-    \item \textbf{URLs}: 157,480 total URLs, 84,451 unique, 81\% external references
-    \item \textbf{File Languages}: 711,923 changes across 20+ languages (TypeScript 15.77\%, Python 5.60\%)
-    \item \textbf{Multi-Language PRs}: 34.7\% span multiple languages (avg 1.37 langs/PR)
-    \item \textbf{Agent Versatility}: Claude Code most versatile (58.7\% multi-lang, 2.55 langs/PR)
-    \item \textbf{Temporal Evolution}: 218 days coverage, 154.1 PRs/day average
-\end{itemize}
+\caption{Entity Distributions by Agent (Part 1): Files changed, code additions, PR descriptions, review comments, merge times, and repository popularity. Violin and box plots reveal distinct agent behavior patterns.}
+\label{fig:entity_dist_part1}
+\end{figure}
 
-\textbf{Agent-Specific Insights:}
-\begin{itemize}
-    \item OpenAI Codex: Highest adoption (64.89\% of PRs), best merge rate (82.6\%)
-    \item Claude Code: Most versatile (58.7\% multi-language PRs, 2.55 langs/PR avg)
-    \item Cursor: Strong multi-language support (49.4\%, 1.96 langs/PR)
-    \item Devin: Moderate multi-language (44.4\%, 1.96 langs/PR)
-    \item Copilot: Single-language focus (0.0\% multi-language)
-    \item Human reviewers: 58.5\% of reviews, more critical feedback
-    \item Bot reviewers: 41.5\% of reviews, longer review content
-\end{itemize}
+\begin{figure}[H]
+\centering
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/37_entity_commit_message_verbosity.png}
+\caption{Commit message verbosity}
+\label{fig:entity_commits}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/38_entity_developer_social_reach.png}
+\caption{Developer social reach}
+\label{fig:entity_social}
+\end{subfigure}
 
-\subsection{Research Implications}
+\vspace{0.3cm}
 
-The dataset's characteristics make it suitable for:
-\begin{enumerate}
-    \item \textbf{AI Agent Evaluation}: Comparative analysis of agent performance and code quality
-    \item \textbf{Human-AI Collaboration}: Understanding review patterns and acceptance factors
-    \item \textbf{Longitudinal Studies}: Temporal evolution and learning effects
-    \item \textbf{Software Engineering Metrics}: Code churn, review effectiveness, development velocity
-    \item \textbf{Traceability Research}: External reference patterns, multi-language development
-\end{enumerate}
+\begin{subfigure}[b]{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures_individual/39_entity_issue_description_detail.png}
+\caption{Issue description detail}
+\label{fig:entity_issue}
+\end{subfigure}
 
-This analysis demonstrates the dataset's richness through 20+ visualizations, 10+ statistical tables, and comprehensive coverage of all assignment requirements.
+\caption{Entity Distributions by Agent (Part 2): Commit message lengths, developer social reach, issue detail}
+\label{fig:entity_dist_part2}
+\end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/fig5_human_vs_bot_engagement.png}
+\caption{Human vs Bot Reviewer Engagement: Six-panel analysis showing reviewer type distribution (58.5\% human, 41.5\% bot), review verbosity comparison, review decisions, comment frequency, and top reviewers. Bots write longer reviews (avg 11,700 chars) vs humans (avg 200 chars).}
+\label{fig:human_bot}
+\end{figure}
+
+\newpage
 \section*{Appendix: Comprehensive Statistical Summary}
 
 This appendix provides detailed statistical measures for all key entities, including higher-order moments (skewness, kurtosis) that reveal the distribution characteristics.

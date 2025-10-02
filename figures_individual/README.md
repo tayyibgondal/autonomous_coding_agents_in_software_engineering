@@ -17,6 +17,8 @@ The original analysis notebooks (`data_exploration.ipynb` and `more_exploration.
 
 ### Section 1: PR Metrics Distributions (Files 01-09)
 
+*From `more_exploration.ipynb` - Basic distribution analysis*
+
 | File | Description | Metrics |
 |------|-------------|---------|
 | `01_pr_files_changed_histogram.png` | Files changed per PR (histogram) | Median: varied |
@@ -56,6 +58,8 @@ The original analysis notebooks (`data_exploration.ipynb` and `more_exploration.
 
 ### Section 4: File-Level Change Distributions (Files 25-30)
 
+*From `more_exploration.ipynb` - File-level granularity*
+
 | File | Description | Metrics |
 |------|-------------|---------|
 | `25_file_additions_histogram.png` | Lines added per file | File-level growth |
@@ -64,6 +68,22 @@ The original analysis notebooks (`data_exploration.ipynb` and `more_exploration.
 | `28_file_additions_boxplot.png` | File additions (box plot) | Addition outliers |
 | `29_file_deletions_boxplot.png` | File deletions (box plot) | Deletion outliers |
 | `30_timeline_event_types_barplot.png` | Top 15 timeline event types | Event categories |
+
+### Section 5: Entity Distributions by Agent (Files 31-39)
+
+*From `data_exploration.ipynb` - Agent-specific behavioral analysis*
+
+| File | Description | Plot Type | Metrics |
+|------|-------------|-----------|---------|
+| `31_entity_files_changed_by_agent.png` | Files changed per PR by agent | Violin plot | Agent comparison |
+| `32_entity_lines_added_by_agent.png` | Lines added distribution by agent | Box plot (log scale) | Code volume |
+| `33_entity_pr_description_length_by_agent.png` | PR description length by agent | Histogram overlay | Documentation detail |
+| `34_entity_review_comment_intensity_by_agent.png` | Review comment intensity by agent | Violin plot | Engagement levels |
+| `35_entity_time_to_merge_by_agent.png` | Time to merge by agent | Box plot | Merge velocity |
+| `36_entity_repository_popularity.png` | Repository popularity distribution | Histogram (log scale) | Star counts |
+| `37_entity_commit_message_verbosity.png` | Commit message verbosity | Histogram | Message lengths |
+| `38_entity_developer_social_reach.png` | Developer social reach | Histogram (log scale) | Follower counts |
+| `39_entity_issue_description_detail.png` | Issue description detail | Histogram | Issue body lengths |
 
 ## Technical Specifications
 
