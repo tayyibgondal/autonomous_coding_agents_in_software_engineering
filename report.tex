@@ -26,7 +26,6 @@
 \begin{abstract}
 This report analyzes the AIDev dataset (33,596 PRs, 2,807 repositories, 1,796 users) covering size metrics, entity distributions, traceability, and temporal evolution of AI-generated code contributions across five autonomous coding agents: Claude Code, Cursor, Copilot, Devin, and OpenAI Codex.
 \end{abstract}
-\newpage
 
 \tableofcontents
 \newpage
@@ -247,7 +246,7 @@ Figures~\ref{fig:pr_files}--\ref{fig:pr_state} show right-skewed PR metrics (med
 \label{fig:pr_added}
 \end{subfigure}
 
-\vspace{0.3cm}
+\vspace{0.2cm}
 
 \begin{subfigure}[b]{0.48\textwidth}
 \centering
@@ -263,7 +262,7 @@ Figures~\ref{fig:pr_files}--\ref{fig:pr_state} show right-skewed PR metrics (med
 \label{fig:pr_title}
 \end{subfigure}
 
-\vspace{0.3cm}
+\vspace{0.2cm}
 
 \begin{subfigure}[b]{0.48\textwidth}
 \centering
@@ -303,7 +302,7 @@ Figures~\ref{fig:commits}--\ref{fig:timeline} show collaborative activity (Media
 \label{fig:reviews}
 \end{subfigure}
 
-\vspace{0.3cm}
+\vspace{0.2cm}
 
 \begin{subfigure}[b]{0.48\textwidth}
 \centering
@@ -343,7 +342,7 @@ Figures~\ref{fig:prs_user}--\ref{fig:languages} show user/repo patterns (TypeScr
 \label{fig:prs_repo}
 \end{subfigure}
 
-\vspace{0.3cm}
+\vspace{0.2cm}
 
 \begin{subfigure}[b]{0.48\textwidth}
 \centering
@@ -392,7 +391,7 @@ Figures~\ref{fig:file_adds}--\ref{fig:event_types} show file-level changes (Medi
 \label{fig:file_dels}
 \end{subfigure}
 
-\vspace{0.3cm}
+\vspace{0.2cm}
 
 \begin{subfigure}[b]{0.48\textwidth}
 \centering
@@ -411,7 +410,6 @@ Figures~\ref{fig:file_adds}--\ref{fig:event_types} show file-level changes (Medi
 \caption{File-Level Change Distributions (Top events: committed 79K, commented 33K, closed 30K)}
 \label{fig:file_level_all}
 \end{figure}
-
 
 \section{Traceability Analysis}
 
@@ -541,7 +539,6 @@ Max langs/PR & 15 & Copilot & 0.0\% (0.00 avg) \\
 \label{fig:temporal_evolution}
 \end{figure}
 
-
 \section{Agent-Specific Analysis}
 
 \subsection{Agent Adoption \& Acceptance}
@@ -578,7 +575,7 @@ Max langs/PR & 15 & Copilot & 0.0\% (0.00 avg) \\
 \label{fig:entity_additions}
 \end{subfigure}
 
-\vspace{0.3cm}
+\vspace{0.2cm}
 
 \begin{subfigure}[b]{0.48\textwidth}
 \centering
@@ -594,7 +591,7 @@ Max langs/PR & 15 & Copilot & 0.0\% (0.00 avg) \\
 \label{fig:entity_comments}
 \end{subfigure}
 
-\vspace{0.3cm}
+\vspace{0.2cm}
 
 \begin{subfigure}[b]{0.48\textwidth}
 \centering
@@ -630,7 +627,7 @@ Max langs/PR & 15 & Copilot & 0.0\% (0.00 avg) \\
 \label{fig:entity_social}
 \end{subfigure}
 
-\vspace{0.3cm}
+\vspace{0.2cm}
 
 \begin{subfigure}[b]{0.48\textwidth}
 \centering
@@ -696,7 +693,7 @@ Repository Forks & 2,807 & 750.35 & 104.0 & 3,135.61 & 1.0 & 36.0 & 399.5 & 62,6
 
 \textbf{Interpretation Notes:}
 \begin{itemize}
-    \item \textbf{High Skewness (greater than2)}: All metrics show strong right-skewed distributions, indicating most values are small with occasional extreme outliers
+    \item \textbf{High Skewness (greater than 2)}: All metrics show strong right-skewed distributions, indicating most values are small with occasional extreme outliers
     \item \textbf{Extreme Kurtosis}: Values ranging from 13 to 19,770 indicate heavy-tailed distributions with extreme outliers
     \item \textbf{Large Mean-Median Gap}: Confirms outlier influence (e.g., mean files/PR: 15.62 vs median: 3.0)
     \item \textbf{IQR Analysis}: Interquartile ranges are small relative to maximums, showing most data is concentrated in lower ranges

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  1 OCT 2025 23:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  2 OCT 2025 00:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -617,7 +617,7 @@ g  used on input line 365.
 [8 <./figures_individual/10_commits_per_pr_histogram.png> <./figures_individual
 /13_reviews_per_pr_histogram.png> <./figures_individual/16_comments_per_pr_hist
 ogram.png> <./figures_individual/18_timeline_events_per_pr_histogram.png>]
-Overfull \vbox (107.58295pt too high) has occurred while \output is active []
+Overfull \vbox (104.7375pt too high) has occurred while \output is active []
 
 
 
@@ -657,176 +657,183 @@ File: figures_individual/30_timeline_event_types_barplot.png Graphic file (type
 Package pdftex.def Info: figures_individual/30_timeline_event_types_barplot.png
   used on input line 405.
 (pdftex.def)             Requested size: 225.4804pt x 186.59618pt.
-<figures/fig1_agent_adoption_landscape.png, id=221, 1293.633pt x 354.123pt>
-File: figures/fig1_agent_adoption_landscape.png Graphic file (type png)
-<use figures/fig1_agent_adoption_landscape.png>
-Package pdftex.def Info: figures/fig1_agent_adoption_landscape.png  used on inp
-ut line 420.
-(pdftex.def)             Requested size: 469.75502pt x 128.59189pt.
 
 
 [10 <./figures_individual/25_file_additions_histogram.png> <./figures_individua
 l/26_file_deletions_histogram.png> <./figures_individual/27_file_status_distrib
 ution.png> <./figures_individual/30_timeline_event_types_barplot.png>]
-<figures/fig2_pr_acceptance_rates.png, id=231, 1145.4795pt x 426.393pt>
+
+[11]
+<figures/temporal_01_pr_growth.png, id=236, 1293.633pt x 853.5087pt>
+File: figures/temporal_01_pr_growth.png Graphic file (type png)
+<use figures/temporal_01_pr_growth.png>
+Package pdftex.def Info: figures/temporal_01_pr_growth.png  used on input line 
+516.
+(pdftex.def)             Requested size: 446.26582pt x 294.43477pt.
+
+
+[12]
+<figures/temporal_02_multi_entity_evolution.png, id=243, 1436.0049pt x 1136.807
+1pt>
+File: figures/temporal_02_multi_entity_evolution.png Graphic file (type png)
+<use figures/temporal_02_multi_entity_evolution.png>
+Package pdftex.def Info: figures/temporal_02_multi_entity_evolution.png  used o
+n input line 523.
+(pdftex.def)             Requested size: 469.75502pt x 371.86906pt.
+
+
+[13 <./figures/temporal_01_pr_growth.png>]
+<figures/temporal_03_repo_user_growth.png, id=251, 1433.8368pt x 995.1579pt>
+File: figures/temporal_03_repo_user_growth.png Graphic file (type png)
+<use figures/temporal_03_repo_user_growth.png>
+Package pdftex.def Info: figures/temporal_03_repo_user_growth.png  used on inpu
+t line 530.
+(pdftex.def)             Requested size: 469.75502pt x 326.03429pt.
+
+
+[14 <./figures/temporal_02_multi_entity_evolution.png>]
+<figures/fig4_temporal_evolution.png, id=258, 1292.1876pt x 860.013pt>
+File: figures/fig4_temporal_evolution.png Graphic file (type png)
+<use figures/fig4_temporal_evolution.png>
+Package pdftex.def Info: figures/fig4_temporal_evolution.png  used on input lin
+e 537.
+(pdftex.def)             Requested size: 469.75502pt x 312.64891pt.
+
+
+[15 <./figures/temporal_03_repo_user_growth.png>]
+<figures/fig1_agent_adoption_landscape.png, id=265, 1293.633pt x 354.123pt>
+File: figures/fig1_agent_adoption_landscape.png Graphic file (type png)
+<use figures/fig1_agent_adoption_landscape.png>
+Package pdftex.def Info: figures/fig1_agent_adoption_landscape.png  used on inp
+ut line 548.
+(pdftex.def)             Requested size: 469.75502pt x 128.59189pt.
+<figures/fig2_pr_acceptance_rates.png, id=266, 1145.4795pt x 426.393pt>
 File: figures/fig2_pr_acceptance_rates.png Graphic file (type png)
 <use figures/fig2_pr_acceptance_rates.png>
 Package pdftex.def Info: figures/fig2_pr_acceptance_rates.png  used on input li
-ne 427.
+ne 555.
 (pdftex.def)             Requested size: 469.75502pt x 174.8613pt.
-<figures_individual/31_entity_files_changed_by_agent.png, id=232, 851.8224pt x 
+
+
+[16 <./figures/fig4_temporal_evolution.png> <./figures/fig1_agent_adoption_land
+scape.png>]
+<figures_individual/31_entity_files_changed_by_agent.png, id=275, 851.8224pt x 
 561.7788pt>
 File: figures_individual/31_entity_files_changed_by_agent.png Graphic file (typ
 e png)
 <use figures_individual/31_entity_files_changed_by_agent.png>
 Package pdftex.def Info: figures_individual/31_entity_files_changed_by_agent.pn
-g  used on input line 438.
+g  used on input line 566.
 (pdftex.def)             Requested size: 225.4804pt x 148.69922pt.
-<figures_individual/32_entity_lines_added_by_agent.png, id=233, 850.8588pt x 56
+<figures_individual/32_entity_lines_added_by_agent.png, id=276, 850.8588pt x 56
 1.7788pt>
 File: figures_individual/32_entity_lines_added_by_agent.png Graphic file (type 
 png)
 <use figures_individual/32_entity_lines_added_by_agent.png>
 Package pdftex.def Info: figures_individual/32_entity_lines_added_by_agent.png 
- used on input line 445.
+ used on input line 573.
 (pdftex.def)             Requested size: 225.4804pt x 148.87067pt.
-<figures_individual/33_entity_pr_description_length_by_agent.png, id=234, 851.5
+<figures_individual/33_entity_pr_description_length_by_agent.png, id=277, 851.5
 815pt x 561.5379pt>
 File: figures_individual/33_entity_pr_description_length_by_agent.png Graphic f
 ile (type png)
 <use figures_individual/33_entity_pr_description_length_by_agent.png>
 Package pdftex.def Info: figures_individual/33_entity_pr_description_length_by_
-agent.png  used on input line 454.
+agent.png  used on input line 582.
 (pdftex.def)             Requested size: 225.4804pt x 148.6783pt.
-<figures_individual/34_entity_review_comment_intensity_by_agent.png, id=235, 85
+<figures_individual/34_entity_review_comment_intensity_by_agent.png, id=278, 85
 1.3406pt x 561.7788pt>
 File: figures_individual/34_entity_review_comment_intensity_by_agent.png Graphi
 c file (type png)
 <use figures_individual/34_entity_review_comment_intensity_by_agent.png>
 Package pdftex.def Info: figures_individual/34_entity_review_comment_intensity_
-by_agent.png  used on input line 461.
+by_agent.png  used on input line 589.
 (pdftex.def)             Requested size: 225.4804pt x 148.78494pt.
-<figures_individual/35_entity_time_to_merge_by_agent.png, id=236, 851.5815pt x 
+<figures_individual/35_entity_time_to_merge_by_agent.png, id=279, 851.5815pt x 
 561.5379pt>
 File: figures_individual/35_entity_time_to_merge_by_agent.png Graphic file (typ
 e png)
 <use figures_individual/35_entity_time_to_merge_by_agent.png>
 Package pdftex.def Info: figures_individual/35_entity_time_to_merge_by_agent.pn
-g  used on input line 470.
+g  used on input line 598.
 (pdftex.def)             Requested size: 225.4804pt x 148.6783pt.
-<figures_individual/36_entity_repository_popularity.png, id=237, 851.5815pt x 5
+<figures_individual/36_entity_repository_popularity.png, id=280, 851.5815pt x 5
 60.0925pt>
 File: figures_individual/36_entity_repository_popularity.png Graphic file (type
  png)
 <use figures_individual/36_entity_repository_popularity.png>
 Package pdftex.def Info: figures_individual/36_entity_repository_popularity.png
-  used on input line 477.
+  used on input line 605.
 (pdftex.def)             Requested size: 225.4804pt x 148.29561pt.
 
 
-[11 <./figures/fig1_agent_adoption_landscape.png> <./figures/fig2_pr_acceptance
-_rates.png>]
-<figures_individual/37_entity_commit_message_verbosity.png, id=246, 851.5815pt 
+[17 <./figures/fig2_pr_acceptance_rates.png>]
+<figures_individual/37_entity_commit_message_verbosity.png, id=287, 851.5815pt 
 x 561.7788pt>
 File: figures_individual/37_entity_commit_message_verbosity.png Graphic file (t
 ype png)
 <use figures_individual/37_entity_commit_message_verbosity.png>
 Package pdftex.def Info: figures_individual/37_entity_commit_message_verbosity.
-png  used on input line 490.
+png  used on input line 618.
 (pdftex.def)             Requested size: 225.4804pt x 148.74208pt.
-<figures_individual/38_entity_developer_social_reach.png, id=247, 851.5815pt x 
+<figures_individual/38_entity_developer_social_reach.png, id=288, 851.5815pt x 
 560.3334pt>
 File: figures_individual/38_entity_developer_social_reach.png Graphic file (typ
 e png)
 <use figures_individual/38_entity_developer_social_reach.png>
 Package pdftex.def Info: figures_individual/38_entity_developer_social_reach.pn
-g  used on input line 497.
+g  used on input line 625.
 (pdftex.def)             Requested size: 225.4804pt x 148.35939pt.
-<figures_individual/39_entity_issue_description_detail.png, id=248, 851.5815pt 
+<figures_individual/39_entity_issue_description_detail.png, id=289, 851.5815pt 
 x 561.5379pt>
 File: figures_individual/39_entity_issue_description_detail.png Graphic file (t
 ype png)
 <use figures_individual/39_entity_issue_description_detail.png>
 Package pdftex.def Info: figures_individual/39_entity_issue_description_detail.
-png  used on input line 506.
+png  used on input line 634.
 (pdftex.def)             Requested size: 225.4804pt x 148.6783pt.
 
 
-[12 <./figures_individual/31_entity_files_changed_by_agent.png> <./figures_indi
+[18 <./figures_individual/31_entity_files_changed_by_agent.png> <./figures_indi
 vidual/32_entity_lines_added_by_agent.png> <./figures_individual/33_entity_pr_d
 escription_length_by_agent.png> <./figures_individual/34_entity_review_comment_
 intensity_by_agent.png> <./figures_individual/35_entity_time_to_merge_by_agent.
 png> <./figures_individual/36_entity_repository_popularity.png>]
-<figures/fig5_human_vs_bot_engagement.png, id=260, 1491.171pt x 952.7595pt>
+<figures/fig5_human_vs_bot_engagement.png, id=301, 1491.171pt x 952.7595pt>
 File: figures/fig5_human_vs_bot_engagement.png Graphic file (type png)
 <use figures/fig5_human_vs_bot_engagement.png>
 Package pdftex.def Info: figures/fig5_human_vs_bot_engagement.png  used on inpu
-t line 517.
+t line 645.
 (pdftex.def)             Requested size: 469.75502pt x 300.13536pt.
 
 
-[13 <./figures_individual/37_entity_commit_message_verbosity.png> <./figures_in
+[19 <./figures_individual/37_entity_commit_message_verbosity.png> <./figures_in
 dividual/38_entity_developer_social_reach.png> <./figures_individual/39_entity_
 issue_description_detail.png>]
 
-[14 <./figures/fig5_human_vs_bot_engagement.png>]
-<figures/temporal_01_pr_growth.png, id=277, 1293.633pt x 853.5087pt>
-File: figures/temporal_01_pr_growth.png Graphic file (type png)
-<use figures/temporal_01_pr_growth.png>
-Package pdftex.def Info: figures/temporal_01_pr_growth.png  used on input line 
-624.
-(pdftex.def)             Requested size: 446.26582pt x 294.43477pt.
+[20 <./figures/fig5_human_vs_bot_engagement.png>]
 
-
-[15]
-<figures/temporal_02_multi_entity_evolution.png, id=285, 1436.0049pt x 1136.807
-1pt>
-File: figures/temporal_02_multi_entity_evolution.png Graphic file (type png)
-<use figures/temporal_02_multi_entity_evolution.png>
-Package pdftex.def Info: figures/temporal_02_multi_entity_evolution.png  used o
-n input line 631.
-(pdftex.def)             Requested size: 469.75502pt x 371.86906pt.
-
-
-[16 <./figures/temporal_01_pr_growth.png>]
-<figures/temporal_03_repo_user_growth.png, id=292, 1433.8368pt x 995.1579pt>
-File: figures/temporal_03_repo_user_growth.png Graphic file (type png)
-<use figures/temporal_03_repo_user_growth.png>
-Package pdftex.def Info: figures/temporal_03_repo_user_growth.png  used on inpu
-t line 638.
-(pdftex.def)             Requested size: 469.75502pt x 326.03429pt.
-
-
-[17 <./figures/temporal_02_multi_entity_evolution.png>]
-<figures/fig4_temporal_evolution.png, id=299, 1292.1876pt x 860.013pt>
-File: figures/fig4_temporal_evolution.png Graphic file (type png)
-<use figures/fig4_temporal_evolution.png>
-Package pdftex.def Info: figures/fig4_temporal_evolution.png  used on input lin
-e 645.
-(pdftex.def)             Requested size: 469.75502pt x 312.64891pt.
-
-
-[18 <./figures/temporal_03_repo_user_growth.png>]
-
-[19 <./figures/fig4_temporal_evolution.png>]
-
-[20{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.en
+[21{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.en
 c}] (./report.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 9E8BC1FD59AAA2A88EEAD57EC003D15B;4009.
+(rerunfilecheck)             Checksum: ABED381DE6496F49D2A4C038763105F5;4009.
  ) 
 Here is how much of TeX's memory you used:
- 12306 strings out of 473190
- 205026 string characters out of 5715801
- 617579 words of memory out of 5000000
+ 12307 strings out of 473190
+ 205033 string characters out of 5715801
+ 621579 words of memory out of 5000000
  35353 multiletter control sequences out of 15000+600000
  567490 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,10n,79p,469b,545s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,10n,79p,468b,545s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb></
@@ -837,10 +844,10 @@ al/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/loca
 l/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local
 /texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/
 texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on report.pdf (20 pages, 8805879 bytes).
+Output written on report.pdf (21 pages, 8805852 bytes).
 PDF statistics:
- 385 PDF objects out of 1000 (max. 8388607)
- 270 compressed objects within 3 object streams
- 72 named destinations out of 1000 (max. 500000)
+ 391 PDF objects out of 1000 (max. 8388607)
+ 275 compressed objects within 3 object streams
+ 73 named destinations out of 1000 (max. 500000)
  360 words of extra memory for PDF output out of 10000 (max. 10000000)
 
